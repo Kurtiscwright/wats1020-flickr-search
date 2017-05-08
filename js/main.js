@@ -52,7 +52,6 @@ $(document).on('ready', function(){
     $('button.search').on('click', function(event) {
       event.preventDefault();
       var searchValue = $(event.target.parentElement).find('input[name = "searchText"]')[0];
-      console.log(searchValue);
       searchImages(searchValue.value);
 
     });
