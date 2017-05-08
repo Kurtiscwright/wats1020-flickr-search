@@ -14,7 +14,7 @@ $(document).on('ready', function(){
 
     var searchImages = function(tags) {
 
-    var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+    var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
     $.getJSON(flickrAPI, {
       tags: tags,
@@ -23,7 +23,7 @@ $(document).on('ready', function(){
     }).done(function(data) {
       $("#images").empty();
       $.each(data.items, function(i, item) {
-        var newListItem = $('<li>').append(newImage);
+        var newListItem = $('<li>').addClass("col-md-4");
         var newTitle = $('<p class = "image-title">').html(item.title).appendTo(newListItem);
         var newDate = $('<p class = "image-date">').text(item.date_taken).appendTo(newListItem);
         var newDescription = $('<p class = "image-description">').html(item.description).appendTo(newListItem);
