@@ -23,25 +23,25 @@ $(document).on('ready', function(){
     }).done(function(data) {
       $("#images").empty();
       $.each(data.items, function(i, item) {
-        var newListItem = $('<li>').addClass("col-md-4");
-        var newTitle = $('<p class = "image-title">').html(item.title).appendTo(newListItem);
-        var newDate = $('<p class = "image-date">').text(item.date_taken).appendTo(newListItem);
-        var newDescription = $('<p class = "image-description">').html(item.description).appendTo(newListItem);
-        var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').addClass("flickr-link btn btn-sm").appendTo(newListItem);
+        var newListItem = $('<li>').addClass("col-md-4");  //This is adding items to a list inside of the images class and creating a bootstrap column command
+        var newTitle = $('<p class = "image-title">').html(item.title).appendTo(newListItem); //This adds a paragraph container for the title of the item's pulled with a new class inside of the html for the new item's listed in the newListItem tag
+        var newDate = $('<p class = "image-date">').text(item.date_taken).appendTo(newListItem); //This is adding another seperate paragraph container that holds the data pulled from the item. It is also being added to the listed photos
+        var newDescription = $('<p class = "image-description">').html(item.description).appendTo(newListItem); //This is pulling description's from the API and placing them in a new paragraph container inside of the listed item
+        var newLink = $('<a>').attr('href', item.link).text('View on Flickr.').addClass("flickr-link btn btn-sm").appendTo(newListItem); //This is adding a link so that each photo can take the user to it's flickr page.
 
-        var newButton = $("<button class='btn btn-sm btn-primary'> Enlarge</button>").attr({
-          "data-title": item.title,
-          "data-toggle": "modal",
-          "data-target": "#infoModal",
-          "data-imgsrc": item.media.m,
-          "data-description": item.description,
-          "type": "button"
+        var newButton = $("<button class='btn btn-sm btn-primary'> Enlarge</button>").attr({ //This is an object built around enlarging and bringing to the fore-front of the page
+          "data-title": item.title, //This pulls the title of the item from the API
+          "data-toggle": "modal", // This is adding a jQuery modal or toggle
+          "data-target": "#infoModal", //This is telling the code where to place itself and that location is the infoModal class
+          "data-imgsrc": item.media.m, //This is pulling the source of the item, so the photo itself
+          "data-description": item.description, //This pulls the description from the API
+          "type": "button" //This is finalizing the fact that the object is a button
 
-        }).appendTo(newListItem);
+        }).appendTo(newListItem); //This adds everything in the newButton variable to the newListItem for each photo pulled
 
 
-        $(newListItem).appendTo('#images');
-        if (i === 15) {
+        $(newListItem).appendTo('#images'); //This is adding the listitem to the images class in the html file
+        if (i === 15) { //if i is stricely equal to 15 then return false or if the number of items found adds up to less than 15 return nothing.
           return false;
         }
       });
@@ -49,10 +49,10 @@ $(document).on('ready', function(){
   };
 
 
-    $('button.search').on('click', function(event) {
+    $('button.search').on('click', function(event) { //This is a functional button forcing the search of the flickr API to happen.
       event.preventDefault();
-      var searchValue = $(event.target.parentElement).find('input[name = "searchText"]')[0];
-      searchImages(searchValue.value);
+      var searchValue = $(event.target.parentElement).find('input[name = "searchText"]')[0]; //This variable is what is actually being searched for when the search is called. It is looking for tags that is inside of the field searchText
+      searchImages(searchValue.value); //This is when the search finally starts and is called for.
 
     });
 
@@ -61,4 +61,4 @@ $(document).on('ready', function(){
 
 
 
-});
+}); //this ends the JS script
